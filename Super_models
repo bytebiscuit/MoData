@@ -3,3 +3,6 @@ Kosova datasets:
 
 serbian datasets
 {'', 'република', 'po opštinama', 'донације', 'опис конта', 'општина', 'општина града', 'конто', 'оосо', 'редни број', 'аутономна покрајина', '2010.', 'остали извори', 'rezultati poslovanja lokalnih javnih preduzeća u republici srbiji', 'укупно'}
+
+albania-datasets
+{'data_regjistrimit', 'ec_account_description', 'data_ekzekutimit', 'pershkrimi_fatures', 'payment_service_request_id', 'ministria_linjes', 'kodi_lm', 'numri_fatures', 'shuma', 'payment_instruction_id', 'date_executed', 'furnitori', 'kodi_institucionit', 'emri_institucionit', 'emri_tdo', 'check_date', 'attribute13', 'ec_account', 'checkrun_name'}
