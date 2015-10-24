@@ -47,19 +47,22 @@ def create_umbrella_model(columns_array):
 
 def combine_excel_files(directory,pattern):
     counter = 0
+    tipi2_counter = 0;
+    grupi_counter = 0;
     book = xlwt.Workbook(encoding="utf-8")
-
+    row_count = 0
     sheet1 = book.add_sheet("Sheet 1")
+    umbrella_headers = ['empty1','empty2','empty3','empty4','empty5','empty6','empty7','empty8','empty9', 'tipi 2_1','tipi 2_2', 'groupname', 'parashikim', 'kolona 1', 'kolona 5', 'departamenti', 'instituti', 'data', 'institucioni', 'tipi 1', 'tipi 3', 'tipi 5', 'viti', 'muaji', 'parashikimi', 'shuma', 'tipi 4', 'tipi 6', '4.0', 'grupi_1','grupi_2', 'budget of kosovo - planning', 'kolona 2', 'komuna', 'kolona 3']
+    for u_index in range(0,len(umbrella_headers)):
+        sheet1.write(0,u_index,umbrella_headers[u_index])
+
     for root, dirs, files in os.walk(directory):
         for basename in files:
             if fnmatch.fnmatch(basename, pattern):
                 filename = os.path.join(root, basename)
                 workbook = xlrd.open_workbook(filename)
                 worksheet = workbook.sheet_by_index(0)
-                umbrella_headers = ['empty1','empty2','empty3','empty4','empty5','empty6','empty7','empty8','empty9', 'tipi 2', 'groupname', 'parashikim', 'kolona 1', 'kolona 5', 'departamenti', 'instituti', 'data', 'institucioni', 'tipi 1', 'tipi 3', 'tipi 5', 'viti', 'muaji', 'parashikimi', 'shuma', 'tipi 4', 'tipi 6', '4.0', 'grupi', 'budget of kosovo - planning', 'kolona 2', 'komuna', 'kolona 3']
-                for u_index in range(0,len(umbrella_headers)):
-                    sheet1.write(0,u_index,umbrella_headers[u_index])
-
+                print(filename)
 
                 headers = grab_column_headers(workbook)
 
@@ -69,21 +72,31 @@ def combine_excel_files(directory,pattern):
 
                 values = []
                 for row in range(1, worksheet.nrows):
+                    print(row)
+                    print(worksheet.nrows)
                     counter = 0
+                    tipi2_counter = 0
+                    grupi_counter = 0
                     col_value = []
+                    row_count = row_count + 1
                     for col in range(worksheet.ncols):
 
                         value  = worksheet.cell(row,col).value
                         if headers[col] == '':
                             counter = counter + 1
                             headers_val = 'empty'+ str(counter)
+                        elif headers[col] == 'tipi 2':
+                            tipi2_counter = tipi2_counter + 1;
+                            headers_val = 'tipi 2_' + str(tipi2_counter)
+                        elif headers[col] == 'grupi':
+                            grupi_counter = grupi_counter + 1
+                            headers_val = 'grupi_' + str(grupi_counter)
                         else:
                             headers_val = headers[col]
+
                         column_nr = umbrella_headers.index(headers_val)
-                        print(row)
-                        print(column_nr)
-                        print(value)
-                        sheet1.write(row,column_nr, value)
+
+                        sheet1.write(row_count,column_nr, value)
                         try : value = str(value)
                         except : pass
                         col_value.append(value)
