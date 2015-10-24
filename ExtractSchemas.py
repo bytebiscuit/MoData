@@ -2,8 +2,6 @@ __author__ = 'fatosismali'
 
 import xlrd
 import os, fnmatch
-from os import listdir
-from os.path import isfile, join
 
 
 mypath = "/Users/fatosismali/Desktop/DataScience/MinistryOfData/datasets/Kosovo datasets/"
